@@ -1,6 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
-import Header from "../components/Header";
 import appCss from "../styles.css?url";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { TreeSidebar } from "@/components/tree-sidebar";
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -29,13 +30,17 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="en" className="h-full">
 			<head>
 				<HeadContent />
 			</head>
-			<body>
-				<Header />
-				{children}
+			<body className="h-full">
+				<SidebarProvider>
+					<TreeSidebar />
+					<SidebarInset>
+						<main className="w-full h-full p-6">{children}</main>
+					</SidebarInset>
+				</SidebarProvider>
 				<Scripts />
 			</body>
 		</html>
