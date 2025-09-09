@@ -26,6 +26,8 @@ export function Tree({ item }: TreeProps) {
 	const [name, ...items] = Array.isArray(item) ? item : [item];
 	const treeItem = name as TreeItemData;
 
+	// console.log(router.matchRoute)
+
 	if (!items.length) {
 		return (
 			<SidebarMenuButton
@@ -48,7 +50,7 @@ export function Tree({ item }: TreeProps) {
 				defaultOpen
 			>
 				<CollapsibleTrigger asChild>
-					<SidebarMenuButton>
+					<SidebarMenuButton className="text-slate-500">
 						<FolderOpenIcon id="folder-open" className="hidden" />
 						<FolderClosedIcon id="folder-closed" className="hidden" />
 						{treeItem.label}
