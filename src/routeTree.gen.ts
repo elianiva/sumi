@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DesignsRouteImport } from './routes/designs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DesignsToggleRouteImport } from './routes/designs/toggle'
+import { Route as DesignsComponentsButtonsToggleRouteImport } from './routes/designs/components/buttons/toggle'
 
+const DesignsRoute = DesignsRouteImport.update({
+  id: '/designs',
+  path: '/designs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -23,44 +29,60 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DesignsToggleRoute = DesignsToggleRouteImport.update({
-  id: '/designs/toggle',
-  path: '/designs/toggle',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const DesignsComponentsButtonsToggleRoute =
+  DesignsComponentsButtonsToggleRouteImport.update({
+    id: '/components/buttons/toggle',
+    path: '/components/buttons/toggle',
+    getParentRoute: () => DesignsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/designs/toggle': typeof DesignsToggleRoute
+  '/designs': typeof DesignsRouteWithChildren
+  '/designs/components/buttons/toggle': typeof DesignsComponentsButtonsToggleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/designs/toggle': typeof DesignsToggleRoute
+  '/designs': typeof DesignsRouteWithChildren
+  '/designs/components/buttons/toggle': typeof DesignsComponentsButtonsToggleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/designs/toggle': typeof DesignsToggleRoute
+  '/designs': typeof DesignsRouteWithChildren
+  '/designs/components/buttons/toggle': typeof DesignsComponentsButtonsToggleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/designs/toggle'
+  fullPaths: '/' | '/about' | '/designs' | '/designs/components/buttons/toggle'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/designs/toggle'
-  id: '__root__' | '/' | '/about' | '/designs/toggle'
+  to: '/' | '/about' | '/designs' | '/designs/components/buttons/toggle'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/designs'
+    | '/designs/components/buttons/toggle'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  DesignsToggleRoute: typeof DesignsToggleRoute
+  DesignsRoute: typeof DesignsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/designs': {
+      id: '/designs'
+      path: '/designs'
+      fullPath: '/designs'
+      preLoaderRoute: typeof DesignsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -75,20 +97,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/designs/toggle': {
-      id: '/designs/toggle'
-      path: '/designs/toggle'
-      fullPath: '/designs/toggle'
-      preLoaderRoute: typeof DesignsToggleRouteImport
-      parentRoute: typeof rootRouteImport
+    '/designs/components/buttons/toggle': {
+      id: '/designs/components/buttons/toggle'
+      path: '/components/buttons/toggle'
+      fullPath: '/designs/components/buttons/toggle'
+      preLoaderRoute: typeof DesignsComponentsButtonsToggleRouteImport
+      parentRoute: typeof DesignsRoute
     }
   }
 }
 
+interface DesignsRouteChildren {
+  DesignsComponentsButtonsToggleRoute: typeof DesignsComponentsButtonsToggleRoute
+}
+
+const DesignsRouteChildren: DesignsRouteChildren = {
+  DesignsComponentsButtonsToggleRoute: DesignsComponentsButtonsToggleRoute,
+}
+
+const DesignsRouteWithChildren =
+  DesignsRoute._addFileChildren(DesignsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  DesignsToggleRoute: DesignsToggleRoute,
+  DesignsRoute: DesignsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

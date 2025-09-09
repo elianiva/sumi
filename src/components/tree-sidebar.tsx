@@ -17,14 +17,20 @@ const DESIGNS: Array<TreeItem> = [
 		{ label: "Components" },
 		[
 			{ label: "Buttons" },
-			[{ label: "Toggle", url: "/toggle", icon: <ToggleLeftIcon /> }],
+			[
+				{
+					label: "Toggle",
+					url: "/designs/components/buttons/toggle",
+					icon: <ToggleLeftIcon />,
+				},
+			],
 		],
 	],
 ];
 
 export function TreeSidebar() {
 	return (
-		<Sidebar className="border-dashed border-r-slate-500">
+		<Sidebar className="border-dashed border-r-slate-500 after:content-[''] after:absolute after:top-0 after:-right-[1px] after:w-1 after:h-full after:bg-gradient-to-t after:from-white after:via-transparent after:to-white after:z-20">
 			<SidebarContent className="bg-background">
 				<SidebarGroup>
 					<SidebarGroupLabel>Navigation</SidebarGroupLabel>

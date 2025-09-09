@@ -1,4 +1,4 @@
-import { ChevronRightIcon, FileIcon, FolderIcon } from "lucide-react";
+import { FileIcon, FolderClosedIcon, FolderOpenIcon } from "lucide-react";
 import { SidebarMenuButton, SidebarMenuItem, SidebarMenuSub } from "./sidebar";
 import {
 	Collapsible,
@@ -33,8 +33,7 @@ export function Tree({ item }: TreeProps) {
 				className="data-[active=true]:bg-transparent"
 				asChild
 			>
-				{/* @ts-expect-error: we can't infer dynamic route path */}
-				<Link to={`/designs/${treeItem.url ?? ""}`}>
+				<Link to={treeItem.url ?? ""}>
 					{treeItem.icon ?? <FileIcon />}
 					{treeItem.label}
 				</Link>
@@ -45,13 +44,13 @@ export function Tree({ item }: TreeProps) {
 	return (
 		<SidebarMenuItem>
 			<Collapsible
-				className="group/collapsible [&[data-state=open]>button>svg:first-child]:rotate-90"
+				className="group/collapsible [&[data-state=open]>button>#folder-open]:block [&[data-state=closed]>button>#folder-closed]:block"
 				defaultOpen
 			>
 				<CollapsibleTrigger asChild>
 					<SidebarMenuButton>
-						<ChevronRightIcon className="transition-transform" />
-						{treeItem.icon ?? <FolderIcon />}
+						<FolderOpenIcon id="folder-open" className="hidden" />
+						<FolderClosedIcon id="folder-closed" className="hidden" />
 						{treeItem.label}
 					</SidebarMenuButton>
 				</CollapsibleTrigger>

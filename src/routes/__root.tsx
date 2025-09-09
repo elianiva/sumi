@@ -2,6 +2,9 @@ import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TreeSidebar } from "@/components/tree-sidebar";
+import monaspaceNeonFont from "@fontsource/monaspace-neon/index.css?url";
+import monaspaceNeonFontLight from "@fontsource/monaspace-neon/latin-300?url";
+import monaspaceNeonFontBold from "@fontsource/monaspace-neon/latin-600?url";
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -18,10 +21,10 @@ export const Route = createRootRoute({
 			},
 		],
 		links: [
-			{
-				rel: "stylesheet",
-				href: appCss,
-			},
+			{ rel: "stylesheet", href: appCss },
+			{ rel: "stylesheet", href: monaspaceNeonFont },
+			{ rel: "stylesheet", href: monaspaceNeonFontLight },
+			{ rel: "stylesheet", href: monaspaceNeonFontBold },
 		],
 	}),
 
