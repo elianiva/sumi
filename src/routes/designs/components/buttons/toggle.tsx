@@ -25,7 +25,9 @@ function ToggleSwitch({
 }: ToggleSwitchProps) {
 	return (
 		<motion.button
-			whileTap={{ scale: 0.9 }}
+			whileTap={{
+				scale: 0.95,
+			}}
 			type="button"
 			role="switch"
 			aria-checked={checked}
@@ -33,26 +35,34 @@ function ToggleSwitch({
 			disabled={disabled}
 			onClick={() => onCheckedChange(!checked)}
 			className={cn(
-				"group relative inline-flex cursor-pointer select-none items-center rounded-full p-0.5 transition-all outline-none",
-				"focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+				"rounded-full group relative inline-flex cursor-pointer select-none items-center p-0.5 transition-all outline-none",
+				"focus-visible:border-ring  focus-visible:ring-2",
 				disabled ? "opacity-60 cursor-not-allowed" : "",
 				className,
+				checked
+					? "focus-visible:ring-pink-400/50"
+					: "focus-visible:ring-ring/50",
 			)}
 		>
-			<span
+			<motion.span
 				className={cn(
-					"h-6 w-10 pointer-events-none block rounded-full border-2 border-slate-500 transition-colors",
-					checked ? "bg-pink-400 border-pink-400" : "bg-slate-500/30",
+					"rounded-full h-6 w-10 pointer-events-none block transition-colors shadow-inner",
+					checked ? "bg-pink-400 border-pink-400" : "bg-slate-300",
 				)}
 			/>
 			<motion.span
+				layout
 				animate={{
 					left: checked ? 22 : 5,
-					scale: checked ? 1 : 0.8,
-					background: checked ? "white" : "oklch(55.4% 0.046 257.417)",
+					scale: checked ? 1.1 : 0.8,
+					backgroundColor: checked ? "white" : "oklch(55.4% 0.046 257.417)",
+					transition: {
+						delay: 0,
+						ease: "backOut",
+					},
 				}}
 				className={cn(
-					"size-4 pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-full",
+					"rounded-full size-4 pointer-events-none absolute top-1/2 -translate-y-1/2 drop-shadow-sm",
 				)}
 			/>
 		</motion.button>
