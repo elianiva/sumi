@@ -19,8 +19,8 @@ const DESIGNS: Array<TreeItem> = [
 			{ label: "Buttons" },
 			[
 				{
-					label: "Toggle",
-					url: "/designs/components/buttons/toggle",
+					label: "Control Center",
+					url: "/designs/components/buttons/control-center",
 					icon: <ToggleLeftIcon />,
 				},
 			],

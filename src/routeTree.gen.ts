@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as DesignsRouteImport } from './routes/designs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DesignsComponentsButtonsToggleRouteImport } from './routes/designs/components/buttons/toggle'
+import { Route as DesignsComponentsButtonsControlCenterRouteImport } from './routes/designs/components/buttons/control-center'
 
 const DesignsRoute = DesignsRouteImport.update({
   id: '/designs',
@@ -29,10 +29,10 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DesignsComponentsButtonsToggleRoute =
-  DesignsComponentsButtonsToggleRouteImport.update({
-    id: '/components/buttons/toggle',
-    path: '/components/buttons/toggle',
+const DesignsComponentsButtonsControlCenterRoute =
+  DesignsComponentsButtonsControlCenterRouteImport.update({
+    id: '/components/buttons/control-center',
+    path: '/components/buttons/control-center',
     getParentRoute: () => DesignsRoute,
   } as any)
 
@@ -40,32 +40,36 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/designs': typeof DesignsRouteWithChildren
-  '/designs/components/buttons/toggle': typeof DesignsComponentsButtonsToggleRoute
+  '/designs/components/buttons/control-center': typeof DesignsComponentsButtonsControlCenterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/designs': typeof DesignsRouteWithChildren
-  '/designs/components/buttons/toggle': typeof DesignsComponentsButtonsToggleRoute
+  '/designs/components/buttons/control-center': typeof DesignsComponentsButtonsControlCenterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/designs': typeof DesignsRouteWithChildren
-  '/designs/components/buttons/toggle': typeof DesignsComponentsButtonsToggleRoute
+  '/designs/components/buttons/control-center': typeof DesignsComponentsButtonsControlCenterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/designs' | '/designs/components/buttons/toggle'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/designs'
+    | '/designs/components/buttons/control-center'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/designs' | '/designs/components/buttons/toggle'
+  to: '/' | '/about' | '/designs' | '/designs/components/buttons/control-center'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/designs'
-    | '/designs/components/buttons/toggle'
+    | '/designs/components/buttons/control-center'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -97,22 +101,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/designs/components/buttons/toggle': {
-      id: '/designs/components/buttons/toggle'
-      path: '/components/buttons/toggle'
-      fullPath: '/designs/components/buttons/toggle'
-      preLoaderRoute: typeof DesignsComponentsButtonsToggleRouteImport
+    '/designs/components/buttons/control-center': {
+      id: '/designs/components/buttons/control-center'
+      path: '/components/buttons/control-center'
+      fullPath: '/designs/components/buttons/control-center'
+      preLoaderRoute: typeof DesignsComponentsButtonsControlCenterRouteImport
       parentRoute: typeof DesignsRoute
     }
   }
 }
 
 interface DesignsRouteChildren {
-  DesignsComponentsButtonsToggleRoute: typeof DesignsComponentsButtonsToggleRoute
+  DesignsComponentsButtonsControlCenterRoute: typeof DesignsComponentsButtonsControlCenterRoute
 }
 
 const DesignsRouteChildren: DesignsRouteChildren = {
-  DesignsComponentsButtonsToggleRoute: DesignsComponentsButtonsToggleRoute,
+  DesignsComponentsButtonsControlCenterRoute:
+    DesignsComponentsButtonsControlCenterRoute,
 }
 
 const DesignsRouteWithChildren =

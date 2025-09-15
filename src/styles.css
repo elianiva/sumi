@@ -125,3 +125,23 @@ body {
 		@apply bg-background text-foreground;
 	}
 }
+
+@layer utilities {
+	.dual-border-gray {
+		box-shadow: 0 0 0 1px oklch(1 0 0), 0 0 0 2px oklch(0.95 0 0);
+	}
+}
+
+/* Sliding gradient transitions */
+.gradient-slide {
+	background-size: 100% 200%;
+	transition: background-position 0.3s ease-in-out;
+}
+
+.gradient-slide-up {
+	background-position: 0% 0%;
+}
+
+.gradient-slide-down {
+	background-position: 0% 100%;
+}

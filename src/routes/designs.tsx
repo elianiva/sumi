@@ -41,7 +41,9 @@ function RouteComponent() {
 								</BreadcrumbItem>
 							) : (
 								<BreadcrumbItem key={path}>
-									<BreadcrumbPage className="capitalize">{path}</BreadcrumbPage>
+									<BreadcrumbPage className="capitalize">
+										{path.replaceAll("-", " ")}
+									</BreadcrumbPage>
 								</BreadcrumbItem>
 							)}
 							{index !== paths.length - 1 && (
