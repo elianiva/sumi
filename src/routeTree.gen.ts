@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as DesignsRouteImport } from './routes/designs'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DesignsThingsPageRevealRouteImport } from './routes/designs/things/page-reveal'
 import { Route as DesignsComponentsButtonsControlCenterRouteImport } from './routes/designs/components/buttons/control-center'
 
 const DesignsRoute = DesignsRouteImport.update({
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DesignsThingsPageRevealRoute = DesignsThingsPageRevealRouteImport.update({
+  id: '/things/page-reveal',
+  path: '/things/page-reveal',
+  getParentRoute: () => DesignsRoute,
+} as any)
 const DesignsComponentsButtonsControlCenterRoute =
   DesignsComponentsButtonsControlCenterRouteImport.update({
     id: '/components/buttons/control-center',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/designs': typeof DesignsRouteWithChildren
+  '/designs/things/page-reveal': typeof DesignsThingsPageRevealRoute
   '/designs/components/buttons/control-center': typeof DesignsComponentsButtonsControlCenterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/designs': typeof DesignsRouteWithChildren
+  '/designs/things/page-reveal': typeof DesignsThingsPageRevealRoute
   '/designs/components/buttons/control-center': typeof DesignsComponentsButtonsControlCenterRoute
 }
 export interface FileRoutesById {
@@ -53,6 +61,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/designs': typeof DesignsRouteWithChildren
+  '/designs/things/page-reveal': typeof DesignsThingsPageRevealRoute
   '/designs/components/buttons/control-center': typeof DesignsComponentsButtonsControlCenterRoute
 }
 export interface FileRouteTypes {
@@ -61,14 +70,21 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/designs'
+    | '/designs/things/page-reveal'
     | '/designs/components/buttons/control-center'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/designs' | '/designs/components/buttons/control-center'
+  to:
+    | '/'
+    | '/about'
+    | '/designs'
+    | '/designs/things/page-reveal'
+    | '/designs/components/buttons/control-center'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/designs'
+    | '/designs/things/page-reveal'
     | '/designs/components/buttons/control-center'
   fileRoutesById: FileRoutesById
 }
@@ -101,6 +117,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/designs/things/page-reveal': {
+      id: '/designs/things/page-reveal'
+      path: '/things/page-reveal'
+      fullPath: '/designs/things/page-reveal'
+      preLoaderRoute: typeof DesignsThingsPageRevealRouteImport
+      parentRoute: typeof DesignsRoute
+    }
     '/designs/components/buttons/control-center': {
       id: '/designs/components/buttons/control-center'
       path: '/components/buttons/control-center'
@@ -112,10 +135,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface DesignsRouteChildren {
+  DesignsThingsPageRevealRoute: typeof DesignsThingsPageRevealRoute
   DesignsComponentsButtonsControlCenterRoute: typeof DesignsComponentsButtonsControlCenterRoute
 }
 
 const DesignsRouteChildren: DesignsRouteChildren = {
+  DesignsThingsPageRevealRoute: DesignsThingsPageRevealRoute,
   DesignsComponentsButtonsControlCenterRoute:
     DesignsComponentsButtonsControlCenterRoute,
 }
