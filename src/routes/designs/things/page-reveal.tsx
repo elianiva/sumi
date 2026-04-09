@@ -12,8 +12,7 @@ function RouteComponent() {
 
   useEffect(() => {
     setShowVideo(false);
-    // Delay matches your final iris animation delay (2s)
-    const timer = setTimeout(() => setShowVideo(true), 2000);
+    const timer = setTimeout(() => setShowVideo(true), 1200);
     return () => clearTimeout(timer);
   }, [key]);
 
@@ -32,7 +31,7 @@ function RouteComponent() {
               className="
             absolute inset-0 z-10 rounded-full bg-cyan-400
             [--fill:0%]
-            animate-[iris-both_1s_ease-out_1.5s_both]
+            animate-[iris-both_1s_ease-out_1.1s_both]
             [mask-image:conic-gradient(from_0deg,white_0%,white_var(--fill),transparent_var(--fill),transparent_calc(100%-var(--fill)),white_calc(100%-var(--fill)))]
           "
             />
@@ -40,7 +39,7 @@ function RouteComponent() {
               className="
             absolute inset-0 z-20 rounded-full bg-yellow-300
             [--fill:0%]
-            animate-[iris-both_1s_ease-out_1.65s_both]
+            animate-[iris-both_1s_ease-out_1.25s_both]
             [mask-image:conic-gradient(from_0deg,white_0%,white_var(--fill),transparent_var(--fill),transparent_calc(100%-var(--fill)),white_calc(100%-var(--fill)))]
           "
             />
@@ -48,7 +47,7 @@ function RouteComponent() {
               className="
             absolute inset-0 z-20 rounded-full bg-white
             [--fill:0%]
-            animate-[iris-both_1s_ease-out_1.8s_both]
+            animate-[iris-both_1s_ease-out_1.4s_both]
             [mask-image:conic-gradient(from_0deg,white_0%,white_var(--fill),transparent_var(--fill),transparent_calc(100%-var(--fill)),white_calc(100%-var(--fill)))]
           "
             />
@@ -56,7 +55,7 @@ function RouteComponent() {
               className="
             absolute inset-0 z-30 rounded-full
             [--fill:0%]
-            animate-[iris-both_1s_ease-out_2s_both]
+            animate-[iris-both_1s_ease-out_1.6s_both]
             [mask-image:conic-gradient(from_0deg,white_0%,white_var(--fill),transparent_var(--fill),transparent_calc(100%-var(--fill)),white_calc(100%-var(--fill)))]
           "
             >
